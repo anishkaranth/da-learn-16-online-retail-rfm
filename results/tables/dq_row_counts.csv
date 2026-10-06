@@ -1,0 +1,14 @@
+entity,row_count,grain
+after removing exact duplicates,536641,invoice line
+clean sales orders,19693,invoice
+dim_country,38,country
+dim_customer (customers with a net sale),4324,customer
+dim_date,305,trading day
+dim_product,3794,stock code
+gross sales lines (before reversals),522537,invoice line
+net sales lines (cln_sales = fact_sales),519828,invoice line
+net sales lines with a CustomerID,388441,invoice line
+raw distinct CustomerID,4372,customer
+raw invoice lines (stg_retail),541909,invoice line
+raw invoices,25900,invoice
+returns (credit-note product lines),8668,invoice line

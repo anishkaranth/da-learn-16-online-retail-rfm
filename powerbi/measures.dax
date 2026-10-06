@@ -1,0 +1,45 @@
+-- Measures for the da-learn-16 online retail star model (home table: fact_sales). Currency = GBP.
+Net Revenue = SUM ( fact_sales[line_revenue] )
+Orders = DISTINCTCOUNT ( fact_sales[invoice] )
+Order Lines = COUNTROWS ( fact_sales )
+Units = SUM ( fact_sales[quantity] )
+Customers = CALCULATE ( DISTINCTCOUNT ( fact_sales[customer_id] ), fact_sales[is_guest] = 0 )
+Avg Order Value = DIVIDE ( [Net Revenue], [Orders] )
+Lines per Order = DIVIDE ( [Order Lines], [Orders] )
+Revenue per Customer = DIVIDE ( CALCULATE ( [Net Revenue], fact_sales[is_guest] = 0 ), [Customers] )
+Guest Revenue % = DIVIDE ( CALCULATE ( [Net Revenue], fact_sales[is_guest] = 1 ), [Net Revenue] )
+UK Share % = DIVIDE ( CALCULATE ( [Net Revenue], dim_country[country] = "United Kingdom" ), CALCULATE ( [Net Revenue], ALL ( dim_country ) ) )
+Revenue Share % = DIVIDE ( [Net Revenue], CALCULATE ( [Net Revenue], ALLSELECTED () ) )
+Repeat Customer % =
+    DIVIDE (
+        COUNTROWS ( FILTER ( VALUES ( fact_sales[customer_id] ),
+            NOT ISBLANK ( fact_sales[customer_id] ) && CALCULATE ( DISTINCTCOUNT ( fact_sales[invoice] ) ) >= 2 ) ),
+        [Customers] )
+Revenue MoM % =
+    VAR cur = [Net Revenue]
+    VAR prev = CALCULATE ( [Net Revenue], DATEADD ( dim_date[invoice_date], -1, MONTH ) )
+    RETURN DIVIDE ( cur - prev, prev )
+New Customers = CALCULATE ( DISTINCTCOUNT ( dim_customer[customer_id] ), TREATAS ( VALUES ( dim_date[year_month] ), dim_customer[cohort_month] ) )
+Outlier Lines = CALCULATE ( COUNTROWS ( fact_sales ), fact_sales[is_extreme_line] = 1 )
+
+-- RFM (scores and segments are computed in SQL: rfm_customer, one row per identified customer, related 1:1 to dim_customer)
+RFM Customers = COUNTROWS ( rfm_customer )
+RFM Revenue = SUM ( rfm_customer[monetary] )
+RFM Customer Share % = DIVIDE ( [RFM Customers], CALCULATE ( [RFM Customers], ALL ( rfm_customer[segment] ) ) )
+RFM Revenue Share % = DIVIDE ( [RFM Revenue], CALCULATE ( [RFM Revenue], ALL ( rfm_customer[segment] ) ) )
+Avg Recency (days) = AVERAGE ( rfm_customer[recency_days] )
+Avg Frequency (orders) = AVERAGE ( rfm_customer[frequency] )
+Avg Monetary = AVERAGE ( rfm_customer[monetary] )
+-- Live recalculation on the loaded fact rows (snapshot 2011-12-10); on the sample fact these differ from rfm_customer
+Recency Days (live) = DATEDIFF ( CALCULATE ( MAX ( fact_sales[invoice_ts] ) ), DATE ( 2011, 12, 10 ), DAY )
+
+-- Cohort retention: needs a disconnected table 'Months Since' = GENERATESERIES ( 0, 12, 1 ) (column [Value])
+Cohort Size = DISTINCTCOUNT ( dim_customer[customer_id] )
+Active In Month N =
+    VAR n = SELECTEDVALUE ( 'Months Since'[Value] )
+    RETURN COUNTROWS (
+        FILTER ( VALUES ( dim_customer[customer_id] ),
+            VAR c = CALCULATE ( MAX ( dim_customer[first_purchase_date] ) )
+            VAR s = EOMONTH ( c, n - 1 ) + 1
+            RETURN CALCULATE ( COUNTROWS ( fact_sales ), ALL ( dim_date ), fact_sales[invoice_ts] >= s, fact_sales[invoice_ts] < EOMONTH ( c, n ) + 1 ) > 0 ) )
+Retention % = DIVIDE ( [Active In Month N], [Cohort Size] )

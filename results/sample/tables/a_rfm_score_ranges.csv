@@ -1,0 +1,16 @@
+metric,score,customers,min_value,max_value
+F frequency (orders),1,82,1.0,1.0
+F frequency (orders),2,38,2.0,2.0
+F frequency (orders),3,25,3.0,3.0
+F frequency (orders),4,27,4.0,5.0
+F frequency (orders),5,39,6.0,28.0
+M monetary (GBP),1,43,2.9,216.39
+M monetary (GBP),2,42,218.26,393.33
+M monetary (GBP),3,42,394.38,833.24
+M monetary (GBP),4,42,839.14,2043.08
+M monetary (GBP),5,42,2199.31,123806.88
+R recency_days,1,43,185.0,374.0
+R recency_days,2,42,71.0,183.0
+R recency_days,3,42,38.0,67.0
+R recency_days,4,44,18.0,37.0
+R recency_days,5,40,1.0,17.0

@@ -1,0 +1,2 @@
+revenue,gross_sales_before_reversals,reversed_sales_value,orders,customers,order_lines,products,countries,units,avg_order_value,median_order_value,avg_lines_per_order,revenue_per_customer,repeat_customer_pct,guest_revenue_pct,uk_revenue_pct,returns_value,return_rate_pct,first_date,last_date
+9861383.75,10247219.32,385835.57,19693,4324,519828,3794,38,5338066,500.76,300.88,26.4,1931.4,65.29,15.31,84.77,475901.16,4.64,2010-12-01,2011-12-09

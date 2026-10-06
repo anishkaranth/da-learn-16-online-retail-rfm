@@ -1,0 +1,32 @@
+check_name,failed_rows,status
+"R, F and M scores all within 1..5",0,PASS
+RFM covers every identified customer once,0,PASS
+cohort sizes sum to dim_customer,0,PASS
+country exists in dim_country,0,PASS
+country revenue sums to total revenue,0,PASS
+customer exists in dim_customer,0,PASS
+date exists in dim_date,0,PASS
+dates inside 2010-12-01 .. 2011-12-09,0,PASS
+"dimension keys unique (product, customer, country, date)",0,PASS
+each credit note reverses at most one sales line,0,PASS
+every InvoiceDate parsed,0,PASS
+every Quantity and UnitPrice parsed,0,PASS
+every clean line is in fact_sales,0,PASS
+every customer has a named segment,0,PASS
+"invoice codes are 6 digits, C+6 or A+6",0,PASS
+line accounting: gross = net + reversed,0,PASS
+"line_revenue = round(quantity x price, 2)",0,PASS
+month-0 retention is 100% for every cohort,0,PASS
+monthly revenue sums to total revenue,0,PASS
+no cancellations or adjustments in fact,0,PASS
+no exact duplicates left in net sales,0,PASS
+no non-product codes in fact,0,PASS
+positive quantity and price in fact,0,PASS
+product exists in dim_product,0,PASS
+product revenue sums to total revenue,0,PASS
+raw rows = flagged rows (nothing dropped while typing),0,PASS
+returns have positive quantity and value,0,PASS
+reversals happen after the sale,0,PASS
+segment revenue sums to identified-customer revenue,0,PASS
+segment shares sum to 100% (+/- 0.1),0,PASS
+tie-aware scores: equal values share a score,0,PASS

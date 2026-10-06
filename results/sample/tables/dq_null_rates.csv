@@ -1,0 +1,4 @@
+column_name,raw_missing_pct,clean_missing_pct,treatment
+CustomerID,12.271,12.252,"kept as guest revenue (is_guest = 1); excluded from RFM, cohorts and customer counts"
+Description,0.225,0.0,"all missing descriptions sit on zero-price lines, which are removed; dim_product uses the most frequent description per code"
+any other column,0.0,0.0,no other missing values

@@ -1,0 +1,2 @@
+duckdb>=1.1
+openpyxl>=3.1   # only for scripts/download_full_data.py (one-off xlsx -> csv)

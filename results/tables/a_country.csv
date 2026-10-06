@@ -1,0 +1,39 @@
+country,market,revenue,revenue_share_pct,orders,customers,avg_order_value,revenue_per_customer
+Australia,International,137124.05,1.39,53,9,2587.25,15236.01
+Austria,International,8742.68,0.09,17,11,514.28,794.79
+Bahrain,International,754.14,0.01,3,2,251.38,377.07
+Belgium,International,36813.69,0.37,98,25,375.65,1472.55
+Brazil,International,1143.6,0.01,1,1,1143.6,1143.6
+Canada,International,3115.44,0.03,5,4,623.09,778.86
+Channel Islands,International,19997.54,0.2,25,9,799.9,2221.95
+Cyprus,International,12940.91,0.13,13,8,995.45,1617.61
+Czech Republic,International,750.98,0.01,2,1,375.49,750.98
+Denmark,International,18081.24,0.18,18,9,1004.51,2009.03
+European Community,International,1159.25,0.01,3,1,386.42,1159.25
+Finland,International,18344.88,0.19,40,12,458.62,1528.74
+France,International,182834.59,1.85,382,87,478.62,2101.55
+Germany,International,203961.43,2.07,443,94,460.41,2169.8
+Greece,International,4425.52,0.04,5,4,885.1,1106.38
+Hong Kong,International,9744.19,0.1,7,0,1392.03,
+Iceland,International,4310.0,0.04,7,1,615.71,4310.0
+Ireland,International,261649.81,2.65,280,3,934.46,87216.6
+Israel,International,8129.41,0.08,8,3,1016.18,2709.8
+Italy,International,15586.74,0.16,35,14,445.34,1113.34
+Japan,International,37314.37,0.38,19,8,1963.91,4664.3
+Lebanon,International,1693.88,0.02,1,1,1693.88,1693.88
+Lithuania,International,1661.06,0.02,4,1,415.27,1661.06
+Malta,International,2030.79,0.02,5,2,406.16,1015.4
+Netherlands,International,283479.54,2.87,93,9,3048.17,31497.73
+Norway,International,32319.31,0.33,32,10,1009.98,3231.93
+Poland,International,6909.85,0.07,19,6,363.68,1151.64
+Portugal,International,26831.26,0.27,50,19,536.63,1412.17
+Saudi Arabia,International,145.92,0.0,1,1,145.92,145.92
+Singapore,International,9120.39,0.09,4,1,2280.1,9120.39
+South Africa,International,1002.31,0.01,1,1,1002.31,1002.31
+Spain,International,52029.97,0.53,87,29,598.05,1794.14
+Sweden,International,36410.83,0.37,34,8,1070.91,4551.35
+Switzerland,International,52717.45,0.53,49,21,1075.87,2510.35
+United Arab Emirates,International,1864.78,0.02,2,2,932.39,932.39
+United Kingdom,Domestic (UK),8359770.09,84.77,17831,3909,468.83,2138.6
+United States,International,1730.92,0.02,3,2,576.97,865.46
+Unknown,International,4740.94,0.05,13,4,364.69,1185.23

@@ -1,0 +1,16 @@
+check_name,affected_rows
+"bad-debt adjustments, invoice A... (removed)",3
+"cancellation lines, invoice C... (moved to returns)",454
+"country labels standardised (EIRE, RSA, USA, Unspecified)",18
+exact duplicate lines (removed),220
+"line revenue above Q3 + 1.5 IQR (flagged, kept)",1887
+"line revenue above the 99.9th percentile (flagged, kept; see a_extreme_lines)",21
+missing CustomerID (all lines),2614
+missing description (all lines),48
+net sales lines without CustomerID (kept as guest),2485
+"non-product codes: postage, fees, manual, discounts, samples, vouchers (removed)",136
+quantity <= 0 on a non-C invoice: stock write-offs (removed),39
+"quantity above Q3 + 1.5 IQR (flagged, kept)",1547
+sales lines exactly reversed by a credit note (removed from net sales),165
+total raw lines not in net sales,1020
+unit price <= 0 (removed),74

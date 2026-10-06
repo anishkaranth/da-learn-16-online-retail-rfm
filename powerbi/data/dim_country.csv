@@ -1,0 +1,39 @@
+country_key,country,market
+1,Australia,International
+2,Austria,International
+3,Bahrain,International
+4,Belgium,International
+5,Brazil,International
+6,Canada,International
+7,Channel Islands,International
+8,Cyprus,International
+9,Czech Republic,International
+10,Denmark,International
+11,European Community,International
+12,Finland,International
+13,France,International
+14,Germany,International
+15,Greece,International
+16,Hong Kong,International
+17,Iceland,International
+18,Ireland,International
+19,Israel,International
+20,Italy,International
+21,Japan,International
+22,Lebanon,International
+23,Lithuania,International
+24,Malta,International
+25,Netherlands,International
+26,Norway,International
+27,Poland,International
+28,Portugal,International
+29,Saudi Arabia,International
+30,Singapore,International
+31,South Africa,International
+32,Spain,International
+33,Sweden,International
+34,Switzerland,International
+35,United Arab Emirates,International
+36,United Kingdom,Domestic (UK)
+37,United States,International
+38,Unknown,International

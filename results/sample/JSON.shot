@@ -1,0 +1,205 @@
+{
+ "snapshot": "headline KPIs + run config",
+ "project": "da-learn-16-online-retail-rfm",
+ "source_mode": "sample",
+ "engine": "duckdb 1.5.6",
+ "config": {
+  "sql_dialect": "Spark SQL style (+ DuckDB shims in sql/00), run on DuckDB",
+  "grain": "fact_sales = one net sales line (invoice x stock code); customers = identified CustomerID with a net sale",
+  "revenue": "net merchandise revenue = quantity x unit price (GBP) on valid sales lines, after removing lines exactly reversed by a credit note; postage/fees/manual/discount/voucher codes excluded",
+  "cleaning": "exact duplicates removed; C-invoices -> returns; A-invoices, price <= 0, quantity <= 0 on sales invoices and non-product codes removed; missing CustomerID kept as guest revenue; country labels standardised",
+  "outlier_rule": "quantity / line revenue above Q3 + 1.5 IQR and line revenue above P99.9 are flagged and kept",
+  "rfm": "snapshot = 2011-12-10 (day after the last invoice); R = days since last order, F = distinct orders, M = net revenue; tie-aware quintile scores 1..5 (1 + floor(5*(rank-1)/n)); 9 named segments from R/F (+M)",
+  "cohort": "cohort = month of first net purchase; retention = share of the cohort with a purchase N months later",
+  "sample_rule": "data/raw: every line of customers with crc32(CustomerID) % 20 = 0, every line of guest invoices with crc32(InvoiceNo) % 40 = 0, plus the first examples of each cleaning rule (scripts/make_sample.py)"
+ },
+ "headline": {
+  "revenue": 465413.6,
+  "gross_sales_before_reversals": 714024.06,
+  "reversed_sales_value": 248610.46,
+  "orders": 818,
+  "customers": 211,
+  "order_lines": 20283,
+  "products": 2640,
+  "countries": 19,
+  "units": 264021,
+  "avg_order_value": 568.97,
+  "median_order_value": 301.59,
+  "avg_lines_per_order": 24.8,
+  "revenue_per_customer": 2065.07,
+  "repeat_customer_pct": 61.14,
+  "guest_revenue_pct": 6.38,
+  "uk_revenue_pct": 64.32,
+  "returns_value": 251789.43,
+  "return_rate_pct": 35.26,
+  "first_date": "2010-12-01",
+  "last_date": "2011-12-09"
+ },
+ "rfm_segments": [
+  {
+   "segment": "01 Champions",
+   "customers": 48,
+   "customer_share_pct": 22.75,
+   "revenue": 312382.95,
+   "revenue_share_pct": 71.69,
+   "avg_recency_days": 15.2,
+   "avg_frequency": 9.38,
+   "avg_monetary": 6507.98
+  },
+  {
+   "segment": "02 Loyal",
+   "customers": 29,
+   "customer_share_pct": 13.74,
+   "revenue": 49306.75,
+   "revenue_share_pct": 11.32,
+   "avg_recency_days": 38.8,
+   "avg_frequency": 4.28,
+   "avg_monetary": 1700.23
+  },
+  {
+   "segment": "03 Potential loyalist",
+   "customers": 11,
+   "customer_share_pct": 5.21,
+   "revenue": 9419.34,
+   "revenue_share_pct": 2.16,
+   "avg_recency_days": 15.6,
+   "avg_frequency": 2.0,
+   "avg_monetary": 856.3
+  },
+  {
+   "segment": "04 New customers",
+   "customers": 14,
+   "customer_share_pct": 6.64,
+   "revenue": 3357.8,
+   "revenue_share_pct": 0.77,
+   "avg_recency_days": 22.6,
+   "avg_frequency": 1.0,
+   "avg_monetary": 239.84
+  },
+  {
+   "segment": "05 Needs attention",
+   "customers": 24,
+   "customer_share_pct": 11.37,
+   "revenue": 10131.85,
+   "revenue_share_pct": 2.33,
+   "avg_recency_days": 55.3,
+   "avg_frequency": 1.33,
+   "avg_monetary": 422.16
+  },
+  {
+   "segment": "06 Cannot lose them",
+   "customers": 4,
+   "customer_share_pct": 1.9,
+   "revenue": 7739.61,
+   "revenue_share_pct": 1.78,
+   "avg_recency_days": 93.5,
+   "avg_frequency": 4.25,
+   "avg_monetary": 1934.9
+  },
+  {
+   "segment": "07 At risk",
+   "customers": 10,
+   "customer_share_pct": 4.74,
+   "revenue": 6239.79,
+   "revenue_share_pct": 1.43,
+   "avg_recency_days": 149.3,
+   "avg_frequency": 3.2,
+   "avg_monetary": 623.98
+  },
+  {
+   "segment": "08 Hibernating",
+   "customers": 31,
+   "customer_share_pct": 14.69,
+   "revenue": 16654.88,
+   "revenue_share_pct": 3.82,
+   "avg_recency_days": 130.7,
+   "avg_frequency": 1.26,
+   "avg_monetary": 537.25
+  },
+  {
+   "segment": "09 Lost",
+   "customers": 40,
+   "customer_share_pct": 18.96,
+   "revenue": 20496.26,
+   "revenue_share_pct": 4.7,
+   "avg_recency_days": 263.0,
+   "avg_frequency": 1.27,
+   "avg_monetary": 512.41
+  }
+ ],
+ "product_concentration": {
+  "products": 2640,
+  "top10_share_pct": 8.67,
+  "top100_share_pct": 35.74,
+  "top20pct_products_share_pct": 76.02,
+  "bottom_half_products": 1320,
+  "bottom50pct_products_share_pct": 5.08
+ },
+ "top_countries": [
+  {
+   "country": "United Kingdom",
+   "revenue": 299353.32,
+   "revenue_share_pct": 64.32,
+   "customers": 182,
+   "avg_order_value": 414.04
+  },
+  {
+   "country": "Australia",
+   "revenue": 123806.88,
+   "revenue_share_pct": 26.6,
+   "customers": 1,
+   "avg_order_value": 6516.15
+  },
+  {
+   "country": "Germany",
+   "revenue": 17545.74,
+   "revenue_share_pct": 3.77,
+   "customers": 4,
+   "avg_order_value": 1253.27
+  },
+  {
+   "country": "France",
+   "revenue": 8107.42,
+   "revenue_share_pct": 1.74,
+   "customers": 6,
+   "avg_order_value": 386.07
+  },
+  {
+   "country": "Italy",
+   "revenue": 3270.36,
+   "revenue_share_pct": 0.7,
+   "customers": 2,
+   "avg_order_value": 817.59
+  },
+  {
+   "country": "Portugal",
+   "revenue": 3253.07,
+   "revenue_share_pct": 0.7,
+   "customers": 2,
+   "avg_order_value": 813.27
+  }
+ ],
+ "top_products": [
+  {"stock_code": "22423", "description": "REGENCY CAKESTAND 3 TIER", "revenue": 7118.39, "units": 578},
+  {"stock_code": "47566", "description": "PARTY BUNTING", "revenue": 6573.76, "units": 1207},
+  {"stock_code": "23084", "description": "RABBIT NIGHT LIGHT", "revenue": 4951.33, "units": 2738},
+  {
+   "stock_code": "85123A",
+   "description": "WHITE HANGING HEART T-LIGHT HOLDER",
+   "revenue": 3865.35,
+   "units": 1409
+  },
+  {"stock_code": "85099B", "description": "JUMBO BAG RED RETROSPOT", "revenue": 3718.31, "units": 1934}
+ ],
+ "retention_curve": [
+  {"months_since": 1, "cohorts": 12, "retention_pct": 24.4, "retention_ex_first_cohort_pct": 19.89},
+  {"months_since": 2, "cohorts": 11, "retention_pct": 20.0, "retention_ex_first_cohort_pct": 19.75},
+  {"months_since": 3, "cohorts": 10, "retention_pct": 20.23, "retention_ex_first_cohort_pct": 17.14},
+  {"months_since": 6, "cohorts": 7, "retention_pct": 29.93, "retention_ex_first_cohort_pct": 25.96},
+  {"months_since": 9, "cohorts": 4, "retention_pct": 31.33, "retention_ex_first_cohort_pct": 20.0},
+  {"months_since": 12, "cohorts": 1, "retention_pct": 15.15, "retention_ex_first_cohort_pct": null}
+ ],
+ "peak_month": {"year_month": 201105, "revenue": 57317.37, "orders": 81, "active_customers": 59},
+ "assertions_passed": 31,
+ "assertions_total": 31
+}
